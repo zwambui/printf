@@ -1,67 +1,32 @@
 #include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
+#include <stdarg.h>
 
 /**
- * _char - prints a character
- * @a: the source of character
- *
- * Return: no. of  characters printed
- */
-
-int _char(va_list a)
-{
-	int length = 0;
-	char c = va_arg(a, int);
-
-	_putchar(c);
-	length++;
-
-	return (length);
-}
-
-
-/**
- * _str - prints a string
- * @a: source of string
+ * _printf - prints a string
+ * @format: string to be printed
  *
  * Return: length of string
  */
 
-int _str(va_list a)
+int _printf(const char *format, ...)
 {
-	char *s = va_arg(a, char *);
-	int length = 0;
+	char *buffer = malloc(sizeof(char) * 1024);
+	char *specifier_buff = malloc(sizeof(char) * 1024);
+	int size, i = 0;
+	va_list ap;
 
-	if (s == NULL)
+	va_start(ap, format);
+
+	size = my_print(format, ap, buffer, specifier_buff);
+	while (buffer[i] != '\0')
 	{
-		length += _printf("(null)");
+		_putchar(buffer[i]);
+		i++;
 	}
-	else
-	{
-		while (*s != '\0')
-		{
-			_putchar(*s);
-			s++;
-			length++;
-		}
-	}
-	return (length);
-
-}
-
-/**
- * _percent - prints a percentage
- * @a: source of percent
- *
- * Return: 0
- */
-
-int _percent(__attribute__((unused)) va_list a)
-{
-	int length = 0;
-
-	_putchar('%');
-	length++;
-	return (length);
+	va_end(ap);
+	free(buffer);
+	free(specifier_buff);
+	return (size);
 }
