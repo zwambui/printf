@@ -56,6 +56,7 @@ int _str(va_list a)
  *
  * Return: 0
  */
+
 int _percent(__attribute__((unused)) va_list a)
 {
 	int length = 0;
