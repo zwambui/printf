@@ -4,6 +4,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 /**
  * struct print - A new struct type defining a printer.
